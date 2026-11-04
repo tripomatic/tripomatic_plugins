@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.tripomatic/trips",
+  "title": "Tripomatic",
+  "description": "Read and change your own Tripomatic trips: itineraries, places, favourites, files, exports.",
+  "version": "0.1.0",
+  "websiteUrl": "https://tripomatic.com/en/connect-ai",
+  "repository": {
+    "url": "https://github.com/tripomatic/tripomatic_plugins",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.tripomatic.com/mcp"
+    }
+  ]
+}

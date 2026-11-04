@@ -1,0 +1,19 @@
+{
+  "name": "tripomatic",
+  "version": "0.1.0",
+  "description": "Plan, tidy and get briefed on your Tripomatic trips from your AI assistant.",
+  "author": {
+    "name": "Tripomatic",
+    "email": "team@tripomatic.com"
+  },
+  "homepage": "https://tripomatic.com/en/connect-ai",
+  "repository": "https://github.com/tripomatic/tripomatic_plugins",
+  "keywords": ["tripomatic", "travel", "trip-planning", "itinerary"],
+  "skills": "./skills/",
+  "mcpServers": {
+    "tripomatic": {
+      "type": "http",
+      "url": "https://mcp.tripomatic.com/mcp"
+    }
+  }
+}

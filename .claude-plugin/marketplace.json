@@ -1,0 +1,16 @@
+{
+  "name": "tripomatic_plugins",
+  "owner": {
+    "name": "Tripomatic",
+    "email": "team@tripomatic.com"
+  },
+  "description": "Plugins for planning and managing your Tripomatic trips with an AI assistant.",
+  "plugins": [
+    {
+      "name": "tripomatic",
+      "source": "./plugins/tripomatic",
+      "version": "0.1.0",
+      "description": "Plan, tidy and get briefed on your Tripomatic trips from your AI assistant."
+    }
+  ]
+}
