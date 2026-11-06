@@ -15,6 +15,16 @@ Then sign in to Tripomatic when your assistant asks. The plugin adds three skill
 - `tidy-my-itinerary`: rebalance and reorder a trip.
 - `trip-briefing`: the plan, weather, alerts and holidays for a trip.
 
+## ChatGPT and Codex
+
+The same plugin is packaged for OpenAI's plugin directory in the portable Agent Plugins layout: `plugins/tripomatic/plugin.json` (listing and review cases under `extensions.com.openai`), `mcp.json`, the shared `skills/` and `assets/`. Build the upload ZIP with:
+
+```
+python3 scripts/build-openai-zip.py
+```
+
+It checks the package against OpenAI's submission limits and writes `dist/tripomatic-<version>.zip`. Keep `version` equal in both manifests. Reviewer credentials never go in the package; they are entered in the OpenAI dashboard.
+
 ## Any other MCP client
 
 Add this URL as a remote server and sign in: `https://mcp.tripomatic.com/mcp`
