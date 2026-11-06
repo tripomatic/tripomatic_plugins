@@ -1,0 +1,100 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "tripomatic",
+  "version": "0.1.0",
+  "description": "Plan, tidy and get briefed on your Tripomatic trips from your AI assistant.",
+  "author": {
+    "name": "Tripomatic",
+    "email": "team@tripomatic.com",
+    "url": "https://tripomatic.com"
+  },
+  "homepage": "https://tripomatic.com/en/connect-ai",
+  "repository": "https://github.com/tripomatic/tripomatic_plugins",
+  "keywords": ["tripomatic", "travel", "trip-planning", "itinerary"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Tripomatic",
+        "shortDescription": "Plan and manage your trips",
+        "longDescription": "Tripomatic connects your own Tripomatic account, so you can plan and change your trips by talking to your assistant. It can read your trips day by day, find places and destinations, add places, hotels, flights and trains, reorder and rebalance days, and brief you on the plan with the weather, travel alerts and public holidays for each day. Changes are saved straight to your account and appear in the Tripomatic app on your phone, tablet and the web. Every change to an existing trip can be undone. It is meant for travellers who already use Tripomatic, or want to, and keep their plans there.\n\nThe assistant acts only as you, on your own trips and on trips others have shared with you. It cannot book or pay for anything: flights, hotels and tours are only planned, never booked. Some features, such as PDF export and attachment upload, depend on the features your Tripomatic account includes. Trips cannot be deleted through the assistant; use the app for that.",
+        "developerName": "Tripomatic",
+        "category": "Travel",
+        "capabilities": [
+          "Read your trips, days, places and favourites",
+          "Create trips and add places, hotels, flights and trains",
+          "Reorder, move and rebalance trip days",
+          "Brief you on weather, travel alerts and holidays per day",
+          "Undo changes to a trip",
+          "Export a trip as a PDF"
+        ],
+        "websiteURL": "https://tripomatic.com/en/connect-ai",
+        "supportURL": "https://tripomatic.com/en/connect-ai",
+        "privacyPolicyURL": "https://tripomatic.com/privacy-policy#ai-assistants",
+        "termsOfServiceURL": "https://tripomatic.com/terms-of-use",
+        "defaultPrompt": [
+          "What's on my next trip, day by day?",
+          "Add a few top sights to day 2 of my trip.",
+          "Brief me on my next trip: weather, alerts and holidays."
+        ],
+        "brandColor": "#0099DD",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Read one day of an existing trip",
+              "prompt": "What's on my Lisbon trip for Saturday, and is anything closed that day?",
+              "tools_triggered": "list_trips, get_trip, get_place",
+              "expected_behavior": "Finds the Lisbon trip, lists Saturday's stops in order with the travel between them, and says which stops are closed or have limited opening hours that day. Nothing is changed."
+            },
+            {
+              "description": "Add places to a day of an existing trip",
+              "prompt": "Add Belém Tower and a lunch spot nearby to day 2 of my Lisbon trip.",
+              "tools_triggered": "list_trips, get_trip, search_places, add_to_trip",
+              "expected_behavior": "Finds Belém Tower in Lisbon and a nearby restaurant, adds both to day 2 in one change, reports what was added with the trip link, and says the change can be undone."
+            },
+            {
+              "description": "Undo the last change",
+              "prompt": "Undo the last change you made to my Lisbon trip.",
+              "tools_triggered": "list_trip_changes, undo_trip_change",
+              "expected_behavior": "Lists the trip's recent changes, undoes the latest one, and confirms that the trip is back as it was before that change."
+            },
+            {
+              "description": "Brief on an upcoming trip",
+              "prompt": "Brief me on my Rome trip: the plan, the weather, holidays and anything I should know.",
+              "tools_triggered": "list_trips, get_trip",
+              "expected_behavior": "Summarises the Rome trip by day with weather (forecast or typical for the month, labelled as such), public holidays on the trip days and any travel alerts with their dates and source. Nothing is changed."
+            },
+            {
+              "description": "Create a new trip from a plan",
+              "prompt": "Create a 3-day Vienna trip starting next Friday: day 1 St. Stephen's Cathedral and the Hofburg, day 2 Schönbrunn Palace, day 3 the Belvedere and the Naschmarkt.",
+              "tools_triggered": "search_places, create_trip",
+              "expected_behavior": "Creates one new 3-day Vienna trip with the named places on the right days and returns the new trip's link."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Booking is out of scope: the plugin plans trips but cannot book or pay. Expected: no tool call that changes anything; the assistant explains that Tripomatic does not book flights.",
+              "prompt": "Book me a flight to Paris for next Monday."
+            },
+            {
+              "description": "General knowledge unrelated to the user's trips. Expected: answered without calling any Tripomatic tool.",
+              "prompt": "What's the capital of Australia?"
+            },
+            {
+              "description": "Deleting a trip is not supported. Expected: nothing is deleted or changed; the assistant says trips can be deleted in the Tripomatic app.",
+              "prompt": "Delete my Lisbon trip."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The plugin does not sell anything, start subscriptions or process payments. It only reads and changes the user's own trips."
+      },
+      "publication": {
+        "release_notes": "First release: read, create and change your Tripomatic trips, find places and destinations, trip briefings with weather, alerts and holidays, undo, favourites, attachments and PDF export."
+      }
+    }
+  }
+}
